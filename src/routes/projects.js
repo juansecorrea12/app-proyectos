@@ -13,16 +13,16 @@ router.get('/', (req, res) => {
 
 // Ruta agregar un nuevo proyecto metodo POST
 router.post('/add', async (req, res) => {
+    const { nombre, descripcion, tiempo_ejecucion, operador } = req.body;
+    const newProject = {
+        nombre,
+        descripcion,
+        tiempo_ejecucion,
+        operador
+    };
     console.log(req.body);
-    // const { nombre, descripcion, tiempo_ejecucion, operador } = req.body;
-    // const newProject = {
-    //     nombre,
-    //     descripcion,
-    //     tiempo_ejecucion,
-    //     operador
-    // };
-    // await pool.query('INSERT INTO projects SET ?', [newProject]);
-    // res.redirect('/projects');
+    await pool.query('INSERT INTO projects SET ?', [newProject]);
+    res.redirect('/projects');
 });
 
 // Ruta para agregar un nuevo proyecto metodo GET
