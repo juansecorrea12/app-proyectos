@@ -6,9 +6,9 @@ const router = express.Router();
 
 
 // Ruta lista de proyectos existentes metodo GET 
-router.get('/', (req, res) => {
-
-    res.render('projects/list_projects');
+router.get('/', async (req, res) => {
+    const projects = await pool.query('SELECT * FROM projects');
+    res.render('projects/list_projects', { projects });
 });
 
 // Ruta agregar un nuevo proyecto metodo POST

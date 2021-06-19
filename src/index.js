@@ -30,6 +30,9 @@ app.use(router);
 app.use('/projects', require('./routes/projects'));
 app.use(require('./routes/authentication'));
 
+// Public
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.listen(config.PORT, () => {
     console.log(`Puerto corriendo el localhost:${config.PORT}`);
 })
