@@ -1,1 +1,55 @@
-<h2>Lista de proyectos</h2>
+<div class="container p-4">
+    <div class="row">
+        {{#each projects}}
+            <div class="col-md-3 mb-3">
+                <div class="card">
+                    <img  class="card-img-top img-project" alt="logo proyecto">
+                    <div class="card-body">
+                        <h4 class="card-title" style="text-transform: capitalize;">
+                            {{nombre}}
+                        </h4>
+                        <hr>
+                        {{!-- <p>{{descripcion}}</p> --}}
+                        {{!-- <h6> El tiempo de ejecución del proyecto es de {{tiempo_ejecucion}} meses</h6> --}}
+                        <span>Operador: <b>{{operador}}</b></span>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>
+
+<script>
+    {{!-- logica para colocar imagenes aleatorias para cada proyecto--}}
+
+    function randomNumber(numeroImages){
+        aleatorio = Math.random() * (numeroImages);
+        aleatorio = Math.floor(aleatorio);
+        return aleatorio;
+    }
+
+    function randomImage(){
+        images = [];
+        images[0] = '/img/img_random/1.jpg';
+        images[1] = '/img/img_random/2.jpg';
+        images[2] = '/img/img_random/3.jpg';
+        images[3] = '/img/img_random/4.jpg';
+        images[4] = '/img/img_random/5.jpg';
+        images[5] = '/img/img_random/6.jpg';
+        images[6] = '/img/img_random/7.jpg';
+        images[7] = '/img/img_random/8.jpg';
+        images[8] = '/img/img_random/9.jpg';
+        images[9] = '/img/img_random/10.jpg';
+
+        {{!-- aleatorio = Math.random() * (images.length);
+        aleatorio = Math.floor(aleatorio); --}}
+
+        const srcImg = document.getElementsByClassName('img-project');
+        console.log(srcImg);
+
+        for(element in srcImg){
+            srcImg[element].src = images[randomNumber(images.length)];
+        }
+    }
+
+</script>
