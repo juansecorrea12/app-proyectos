@@ -28,7 +28,8 @@ router.post('/add', async (req, res) => {
 // Ruta para agregar un nuevo proyecto metodo GET
 router.get('/add', (req, res) => {
     res.status(200).render('projects/add');
-})
+});
 
+// Ruta para mostrar edición del proyecto
 
 module.exports = router;
