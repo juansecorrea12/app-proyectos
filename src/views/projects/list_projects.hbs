@@ -1,34 +1,35 @@
-<div class="container p-4">
+<div class="container-fluid p-4 mt-5">
     <div class="row">
         {{#each projects}}
-            <div class="col-md-3 mb-3">
-                <div class="card">
-                    <img  class="card-img-top img-project" alt="logo proyecto">
-                    <div class="card-body">
-                        <h4 class="card-title" style="text-transform: capitalize;">
-                            {{nombre}}
-                        </h4>
-                        <hr>
-                        {{!-- <p>{{descripcion}}</p> --}}
-                        {{!-- <h6> El tiempo de ejecución del proyecto es de {{tiempo_ejecucion}} meses</h6> --}}
-                        <span>Operador: <b>{{operador}}</b></span>
-                    </div>
+        <div class="col-md-10 col-lg-5 col-sm-12 mb-4 d-flex flex-row border ps-0 mx-auto">
+            <img class="w-50 img-project " alt="logo proyecto">
+            <div class="ms-3 mt-3 mb-3">
+                <h4 style="text-transform: capitalize;">
+                    {{nombre}}
+                </h4>
+                <hr>
+                <p style="text-align: justify;">{{descripcion}}</p>
+                <span>Duración del proyecto: {{tiempo_ejecucion}} meses</span><br><br>
+                <span style="text-transform: capitalize; text-align: right;">Operador: <b>{{operador}}</b></span> <br>
+                <div class="options d-flex justify-content-center mt-3">
+                    <a href="/projects/edit/{{id}}" class="btn btn-secondary w-50 mx-2"> Editar</a>
+                    <a href="/projects/delete/{{id}}" class="btn btn-danger w-50"> Borrar</a>
                 </div>
             </div>
+        </div>
         {{/each}}
     </div>
 </div>
 
 <script>
-    {{!-- logica para colocar imagenes aleatorias para cada proyecto--}}
 
-    function randomNumber(numeroImages){
+    function randomNumber(numeroImages) {
         aleatorio = Math.random() * (numeroImages);
         aleatorio = Math.floor(aleatorio);
         return aleatorio;
     }
 
-    function randomImage(){
+    function randomImage() {
         images = [];
         images[0] = '/img/img_random/1.jpg';
         images[1] = '/img/img_random/2.jpg';
@@ -41,13 +42,9 @@
         images[8] = '/img/img_random/9.jpg';
         images[9] = '/img/img_random/10.jpg';
 
-        {{!-- aleatorio = Math.random() * (images.length);
-        aleatorio = Math.floor(aleatorio); --}}
-
         const srcImg = document.getElementsByClassName('img-project');
-        console.log(srcImg);
 
-        for(element in srcImg){
+        for (element in srcImg) {
             srcImg[element].src = images[randomNumber(images.length)];
         }
     }
