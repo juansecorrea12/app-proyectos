@@ -8,12 +8,14 @@ const router = require('./routes');
 const exphbs = require('express-handlebars');
 const path = require('path');
 const util = require('./utils/handlebars');
+const flash = require('connect-flash');
+const session = require('express-session');
+const MySQLStore = require('express-mysql-session');
+const passport = require('passport');
 
-// middlewares
-app.use(morgan('dev'));
-app.use(express.urlencoded({extended:false}));
-app.use(express.json());
 
+// Inicializadores
+require('./utils/passport');
 
 // Settings views
 app.set('views', path.join(__dirname, 'views'));
@@ -25,6 +27,27 @@ app.engine('.hbs', exphbs({
     helpers: util,
 }));
 app.set('view engine', '.hbs');
+
+// middlewares
+app.use(session({
+    secret: 'fastmysqlnodesession',
+    resave: false,
+    saveUninitialized: false,
+    store: new MySQLStore(config.database),
+}))
+app.use(flash());
+app.use(morgan('dev'));
+app.use(express.urlencoded({extended:false}));
+app.use(express.json());
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Variables globales
+app.use((req, res, next) => {
+    app.locals.success = req.flash('success');
+    app.locals.message = req.flash('message');
+    next();
+})
 
 // Routes
 app.use(router);

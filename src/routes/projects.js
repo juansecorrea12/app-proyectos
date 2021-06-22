@@ -22,6 +22,7 @@ router.post('/add', async (req, res) => {
     };
     console.log(req.body);
     await pool.query('INSERT INTO projects SET ?', [newProject]);
+    req.flash('success', 'Se ha creado un nuevo proyecto');
     res.redirect('/projects');
 });
 
@@ -48,6 +49,7 @@ router.post('/edit/:id', async (req, res) => {
         operador
     };
     await pool.query('UPDATE projects set ? WHERE id = ?', [newProject, id]);
+    req.flash('success', 'Se ha editado el proyecto');
     res.redirect('/projects');
 });
 
@@ -55,6 +57,7 @@ router.post('/edit/:id', async (req, res) => {
 router.get('/delete/:id', async(req, res) => {
     const {id} = req.params;
     await pool.query('DELETE FROM projects WHERE id = ?', [id]);
+    req.flash('success', 'Se ha eliminado el proyecto');
     res.redirect('/projects');
 });
 

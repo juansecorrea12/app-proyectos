@@ -1,0 +1,38 @@
+{{#if success}}
+<div class="container p-4" id="btn-alert">
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{success}}
+                <button type="button" class="btn-close" aria-label="Close" onclick="alertBtn()">
+                    <span aria-hidden="false"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
+
+{{#if message}}
+<div class="container p-4" id="btn-alert">
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{message}}
+                <button type="button" class="btn-close" aria-label="Close" onclick="alertBtn()">
+                    <span aria-hidden="false"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
+
+<script>
+    function alertBtn() {
+        console.log('Pulsado!!');
+        const element = document.getElementById('btn-alert');
+        console.log(element);
+        element.style.display = "none";
+    }
+</script>
