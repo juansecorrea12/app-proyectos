@@ -7,7 +7,7 @@ const morgan = require('morgan');
 const router = require('./routes');
 const exphbs = require('express-handlebars');
 const path = require('path');
-// const util = require('./utils');
+const util = require('./utils/handlebars');
 
 // middlewares
 app.use(morgan('dev'));
@@ -22,6 +22,7 @@ app.engine('.hbs', exphbs({
     layoutsDir: path.join(app.get('views'), 'layouts'),
     partialsDir: path.join(app.get('views'), 'partials'),
     extname: '.hbs',
+    helpers: util,
 }));
 app.set('view engine', '.hbs');
 
