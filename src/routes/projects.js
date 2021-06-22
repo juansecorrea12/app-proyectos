@@ -31,5 +31,32 @@ router.get('/add', (req, res) => {
 });
 
 // Ruta para mostrar edición del proyecto
+router.get('/edit/:id', async (req, res) => {
+    const { id } = req.params;
+    const projects = await pool.query('SELECT * FROM projects WHERE id = ?', [id]);
+    res.render('projects/edit', { project: projects[0] });
+});
+
+// Ruta para actualizar el proyecto
+router.post('/edit/:id', async (req, res) => {
+    const { id } = req.params;
+    const { nombre, descripcion, tiempo_ejecucion, operador } = req.body;
+    const newProject = {
+        nombre,
+        descripcion,
+        tiempo_ejecucion,
+        operador
+    };
+    await pool.query('UPDATE projects set ? WHERE id = ?', [newProject, id]);
+    res.redirect('/projects');
+});
+
+// Ruta para eliminar un proyecto
+router.get('/delete/:id', async(req, res) => {
+    const {id} = req.params;
+    await pool.query('DELETE FROM projects WHERE id = ?', [id]);
+    res.redirect('/projects');
+});
+
 
 module.exports = router;
