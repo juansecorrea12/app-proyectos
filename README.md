@@ -44,12 +44,12 @@ _Esto es lo que veras en el navegador_
 ![](/preview.jpg)
 
 ## Construido con
-* [Express] (https://expressjs.com/) - El framework utilizado.
-* [express-mysql-session] (https://www.npmjs.com/package/express-mysql-session) - Dependencia para crear las sesiones en la base de datos.
-* [bcrypt] (https://www.npmjs.com/package/bcrypt) - Libreria para el hash en las contraseñas.
-* [express-handlebars] (https://www.npmjs.com/package/express-handlebars) - Motor para la visualización de vistas en express.
-* [timeago.js] (https://www.npmjs.com/package/timeago.js) - Libreria utilizada para formatear fechas.
-* [passport] (https://www.npmjs.com/package/passport) - Paquete para autenticar solicitudes, comptible con express.
+* [Express](https://expressjs.com/) - El framework utilizado.
+* [express-mysql-session](https://www.npmjs.com/package/express-mysql-session) - Dependencia para crear las sesiones en la base de datos.
+* [bcrypt](https://www.npmjs.com/package/bcrypt) - Libreria para el hash en las contraseñas.
+* [express-handlebars](https://www.npmjs.com/package/express-handlebars) - Motor para la visualización de vistas en express.
+* [timeago.js](https://www.npmjs.com/package/timeago.js) - Libreria utilizada para formatear fechas.
+* [passport](https://www.npmjs.com/package/passport) - Paquete para autenticar solicitudes, comptible con express.
 
 ## Autores
 * **_Juan Correa_**
