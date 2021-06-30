@@ -4,63 +4,24 @@ const express = require('express');
 const pool = require('../database');
 const { isLogIn } = require('../utils/auth');
 const router = express.Router();
+const projectController = require('../controllers/project');
 
 // Ruta lista de proyectos existentes metodo GET 
-router.get('/', isLogIn,  async (req, res) => {
-    const projects = await pool.query('SELECT * FROM projects WHERE user_id = ?', [req.user.id]);
-    res.render('projects/list_projects', { projects });
-});
+router.get('/', isLogIn, projectController.allProjects);
 
 // Ruta agregar un nuevo proyecto metodo POST
-router.post('/add', isLogIn,  async (req, res) => {
-    const { nombre, descripcion, tiempo_ejecucion, operador } = req.body;
-    const newProject = {
-        nombre,
-        descripcion,
-        tiempo_ejecucion,
-        operador,
-        user_id: req.user.id
-    };
-    console.log(req.body);
-    await pool.query('INSERT INTO projects SET ?', [newProject]);
-    req.flash('success', 'Se ha creado un nuevo proyecto');
-    res.redirect('/projects');
-});
+router.post('/add', isLogIn, projectController.addProject);
 
 // Ruta para agregar un nuevo proyecto metodo GET
-router.get('/add', isLogIn, (req, res) => {
-    res.status(200).render('projects/add');
-});
+router.get('/add', isLogIn, projectController.addProjectView);
 
 // Ruta para mostrar edición del proyecto
-router.get('/edit/:id', isLogIn, async (req, res) => {
-    const { id } = req.params;
-    const projects = await pool.query('SELECT * FROM projects WHERE id = ?', [id]);
-    res.render('projects/edit', { project: projects[0] });
-});
+router.get('/edit/:id', isLogIn, projectController.editProjectView);
 
 // Ruta para actualizar el proyecto
-router.post('/edit/:id', isLogIn, async (req, res) => {
-    const { id } = req.params;
-    const { nombre, descripcion, tiempo_ejecucion, operador } = req.body;
-    const newProject = {
-        nombre,
-        descripcion,
-        tiempo_ejecucion,
-        operador
-    };
-    await pool.query('UPDATE projects set ? WHERE id = ?', [newProject, id]);
-    req.flash('success', 'Se ha editado el proyecto');
-    res.redirect('/projects');
-});
+router.post('/edit/:id', isLogIn, projectController.editProject);
 
 // Ruta para eliminar un proyecto
-router.get('/delete/:id', isLogIn, async(req, res) => {
-    const {id} = req.params;
-    await pool.query('DELETE FROM projects WHERE id = ?', [id]);
-    req.flash('success', 'Se ha eliminado el proyecto');
-    res.redirect('/projects');
-});
-
+router.get('/delete/:id', isLogIn, projectController.deleteProject);
 
 module.exports = router;
