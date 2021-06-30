@@ -2,7 +2,6 @@
 
 const express = require('express');
 const router = express.Router();
-const pool = require('../database');
 const passport = require('passport');
 const {isLogIn, isNotLogIn} = require('../utils/auth');
 
